@@ -1,0 +1,41 @@
+# Document: https://help.github.com/ja/actions
+name: CI TEST
+
+on: [push]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run a one-line script
+        run: echo I want to run lint.
+      # - run: npm install
+      # - name: eslint
+      #   run: npm run lint
+
+  test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run a one-line script
+        run: echo I want to run test.
+      # - run: npm install
+      # - name: jest
+      #   run: npm run test
